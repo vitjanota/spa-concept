@@ -12,7 +12,7 @@ var Page3 = new ContentRenderer(
 	{
 		content: {
 			title: "Page 3: Table example",
-			text: "This is a static page demonstrating simple table renering:",
+			text: "This is a static page demonstrating simple table renering",
 			row: {
 				row01: {
 					cell: {

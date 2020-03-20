@@ -1,0 +1,94 @@
+/* ==================== general ==================== */
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+html {
+  font-family: Open Sans, Arial CE, Helvetica CE, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  margin: 0;
+  color: #333333;
+  background-color: #986d00;
+}
+
+table {
+  border-collapse: collapse;  
+}
+
+table td {
+  font-size: 14px;
+  padding: 10px;
+  border: 1px solid #333333;  
+}
+
+a {
+  color: #990000;
+}
+
+/* ==================== page header ==================== */
+
+header {
+  box-shadow: 0 0 30px rgba(0,0,0,.5);
+  padding: 10px 40px 10px 40px;
+  background-color: #990000;
+  display: flex;
+  justify-content: space-between;
+  height: 75px;
+  position: relative;
+  z-index: 10;
+}
+
+header h1 {
+  color: #eeeeee;
+  font-weight: normal;
+}
+
+#pageHeaderMenu {
+  margin: 20px 0 0 0;
+  cursor: pointer;
+}
+
+#pageHeaderMenuContent {
+  border: 1px solid #bbbbbb;
+  min-width: 100px;
+  padding: 10px 20px 30px 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 7px rgba(0,0,0,.2);
+  display: none;
+  right: 20px;
+  top: 95px;
+  position: absolute;
+}
+
+#pageHeaderMenuContent a {
+  display: block;
+  padding: 0 0 5px 0;
+}
+
+/* ==================== page body ==================== */
+
+#pageBody {
+  padding: 20px 60px 40px 60px;
+  background-color: #dddddd;
+  min-height: 400px;
+}
+
+#pageBody h2 {
+  font-weight: normal;
+}
+
+/* ==================== page footer ==================== */
+
+footer {
+  padding: 10px 40px 10px 40px;
+  color: #eeeeee;
+  font-size: 85%;
+  background-color: #986d00;
+  display: flex;
+  justify-content: flex-end;
+}

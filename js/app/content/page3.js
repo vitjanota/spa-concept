@@ -1,14 +1,14 @@
 var Page3 = new ContentRenderer(
 	pageContentRef,
-	`<div>
-		<h2>%%title%%</h2>
-		<p>%%text%%:</p>
-		<table>
-			<tr data-for-each="row">
-				<td data-for-each="cell">%%content%%</td>
-			</tr>
-		</table>
-	</div>`,
+	"<div>\n\
+		<h2>%%title%%</h2>\n\
+		<p>%%text%%:</p>\n\
+		<table>\n\
+			<tr data-for-each='row'>\n\
+				<td data-for-each='cell'>%%content%%</td>\n\
+			</tr>\n\
+		</table>\n\
+	</div>",
 	{
 		content: {
 			title: "Page 3: Table example",

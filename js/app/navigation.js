@@ -12,7 +12,7 @@ function initNavigation() {
 function createMenu() {
 	var menu = new ContentRenderer(
 		menuSelectors.menuContent,
-		`<a href="%%path%%" class="pageHeaderMenuContentItem">%%label%%</a>`,
+		"<a href='%%path%%' class='pageHeaderMenuContentItem'>%%label%%</a>",
 		appNavigation);
 
 	menu.customPostRenderActivity = function() {

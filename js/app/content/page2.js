@@ -1,6 +1,6 @@
 var Page2 = new ContentRenderer(
 	pageContentRef,
-	`<div><h2>%%title%%</h2></div>`,
+	"<div><h2>%%title%%</h2></div>",
 	{
 		content: {
 			title: "Page 2"
@@ -21,11 +21,11 @@ Page2.customPreRenderActivity = function() {
 		}
 	});
 
-	this.setTemplates(`<div>
-		<h2>%%title%%</h2>
-		<p>%%text%%:</p>
-		<ul>
-			<li data-for-each="list">%%content2%% %%content1%%.</li>
-		</ul>
-	</div>`);
+	this.setTemplates("<div>\n\
+		<h2>%%title%%</h2>\n\
+		<p>%%text%%:</p>\n\
+		<ul>\n\
+			<li data-for-each='list'>%%content2%% %%content1%%.</li>\n\
+		</ul>\n\
+	</div>");
 };

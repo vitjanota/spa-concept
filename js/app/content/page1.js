@@ -1,9 +1,9 @@
 var Page1 = new ContentRenderer(
 	pageContentRef,
-	`<div>
-		<h2>%%title%%</h2>
-		<p>This text contains %%text1%% to <a href="%%url1%%" class="internalLink">%%link1%%</a> and to <a href="%%url2%%" class="internalLink">%%link2%%</a>. %%text2%%</p>
-	</div>`,
+	"<div>\n\
+		<h2>%%title%%</h2>\n\
+		<p>This text contains %%text1%% to <a href='%%url1%%' class='nternalLink'>%%link1%%</a> and to <a href='%%url2%%' class='internalLink'>%%link2%%</a>. %%text2%%</p>\n\
+	</div>",
 	{
 		content: {
 			title: "Page 1: Example of custom content post processing",

@@ -1,5 +1,7 @@
 // misc elements selectors and other definitions
-var pageContentRef = "#pageBodyContent",
+var appIndexPath = "/test/spa/",
+
+	pageContentRef = "#pageBodyContent",
 	
 	menuSelectors = {
 		menu: "#pageHeaderMenu",

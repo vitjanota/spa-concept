@@ -9,9 +9,9 @@ var Page1 = new ContentRenderer(
 			title: "Page 1: Example of custom content post processing",
 			text1: "internal links",
 			link1: "homepage",
-			url1: "/test/spa/",
+			url1: appIndexPath,
 			link2: "nonexisting page",
-			url2: "/test/spa/page4/",
+			url2: appIndexPath + "page4/",
 			text2: "Both links were altered after the content rendering to prevent document relaod."
 		}
 	});

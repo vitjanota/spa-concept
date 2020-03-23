@@ -7,12 +7,13 @@ Works still in progress.
 ## Configuration
 Example is configured to work with `http://mydomain/test/spa/` and with Apache Web Server. So Apache config (`httpd.conf`) should contain corresponding `Directory` setup:
 
-`Alias /test/spa mydirectory
-
+```
+Alias /test/spa mydirectory
 <Directory "mydirectory">
 	AllowOverride All
 	Require all granted
-</Directory>`
+</Directory>
+```
 
 or similar.
 

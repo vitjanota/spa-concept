@@ -17,7 +17,7 @@ Alias /test/spa mydirectory
 
 or similar.
 
-Apache local config file (`.htaccess`) is a integral part of configuration. So be sure that:
+Apache local config file (`.htaccess`) is a integral part of app setup. So be sure that:
 
 1. usage of `.htaccess` is allowed (`AllowOverride All`) as above.
 2. `mod_rewrite` module (used in it) is enabled.

@@ -1,4 +1,5 @@
 // ======================== templating factory ========================
+// version 0.2
 function TemplatingFactory() {
 
     this.templates = [];
@@ -47,10 +48,10 @@ function TemplatingFactory() {
             });
             this.templates.forEach(function(template) {
                 // if template type is of data type use it
-                if (template.attr("data-type").indexOf(type) !== -1) {
+                if (template.attr("data-type").split(" ").indexOf(type) !== -1) {
                     that.renderTemplate(template.clone(true),that.data[key]);
                     // use default template only if no data type tempalte exists
-                } else if (template.attr("data-type").indexOf("default") !== -1 && $.inArray(type, types) === -1) {
+                } else if (template.attr("data-type").split(" ").indexOf("default") !== -1 && $.inArray(type, types) === -1) {
                     that.renderTemplate(template.clone(true),that.data[key]);
                 }
             });
@@ -69,7 +70,7 @@ function TemplatingFactory() {
 
     // itarate through template DOM and update all elements and text nodes
     this.processTemplate = function(element, data) {
-        var attributes, children, dataSubset, newVal, newName, inner;
+        var attributes, children, child = {}, dataSubset, templates = [], newVal, newName, inner, key;
         switch (element[0].nodeType) {
             //tag
             case 1:
@@ -77,33 +78,58 @@ function TemplatingFactory() {
                 if (!element.attr("data-for-each")) {
                     attributes =  element[0].attributes;
                     children = element[0].childNodes;
-                    // update attributes
-                    for (var j = 0; j < attributes.length; j++) {
+                    for (var m = 0; m < attributes.length; m++) {
                         // remove attributes configured to be removed
-                        if (attributes[j].name.indexOf(this.attributesToRemove) !== -1) {
-                            element.removeAttr(attributes[j].name);
-                        // alter attributes configured to be altered and update their values
-                        } else if (attributes[j].name.indexOf(this.attributesToAlter) !== -1) {
-                            // because of 'some' browsers values cannot be used directly, but stored into variables prior processing 
-                            newVal = this.updateValue(element.attr(attributes[j].name),data);
-                            newName = attributes[j].name.replace("data-","");
-                            element.removeAttr(attributes[j].name);
-                            element.attr(newName,newVal);
-                        }
-                        // update values of remaining attributes
-                        else {
-                            element.attr(attributes[j].name, this.updateValue(element.attr(attributes[j].name),data));
+                        if (attributes[m].name.indexOf(this.attributesToRemove) !== -1) {
+                            element.removeAttr(attributes[m].name);
                         }
                     }
-                    //proceed with all children
-                    for (var k = 0; k < children.length; k++) {
-                        this.processTemplate($(children[k]),data);
+                    // update attributes
+                    for (var j = 0; j < attributes.length; j++) {
+                        // update values of all attributes
+                        element.attr(attributes[j].name, this.updateValue(element.attr(attributes[j].name),data));
+                    }
+                    for (var l = 0; l < attributes.length; l++) {
+                        // alter attributes configured to be altered
+                        if (attributes[l].name.indexOf(this.attributesToAlter) !== -1) {
+                            // because of 'some' browsers values cannot be used directly, but stored into variables prior processing 
+                            newVal = element.attr(attributes[l].name);
+                            newName = attributes[l].name.replace("data-","");
+                            element.removeAttr(attributes[l].name);
+                            element.attr(newName,newVal);
+                        }
+                    }
+                    if (element.attr("data-for-each-wrapper")) {
+                        // if element is set as a wrapper for loop processing
+                        // start loop procssing on its children
+                        dataSubset = data[element.attr("data-for-each-wrapper")];
+                        // set undefined type to default on data
+                        for (key in dataSubset) {
+                            if (!dataSubset[key].type) dataSubset[key].type = "default";
+                        }
+                        // set undefined type as default and store all templates
+                        for (var i = 0; i < element.children().length; i++) {
+                            child = $(element.children()[i]);
+                            if (!child.attr("data-type")) child.attr("data-type","default");
+                            templates.push(child);
+                        }
+                        element.removeAttr("data-for-each-wrapper");
+                        // start processing
+                        inner = new TemplatingFactory();
+                        inner.populate(templates, dataSubset);
+                        inner.renderData();
+                        inner.removeTemplates();
+                    } else {
+                        //proceed with all children
+                        for (var k = 0; k < children.length; k++) {
+                            this.processTemplate($(children[k]),data);
+                        }
                     }
                 } else {
                     // set both template and data to default processing type
                     // and remove loop processing flag to avoid endless recursion 
                     dataSubset = data[element.attr("data-for-each")];
-                    for (var key in dataSubset) {
+                    for (key in dataSubset) {
                         dataSubset[key].type = "default";
                     }
                     element.attr("data-type","default").removeAttr("data-for-each");

@@ -8,7 +8,7 @@ $(document).ready(function() {
     });
 
 	// on page load update app view according to current url (document reload)
-	updateView(window.location.pathname,"replace");
+	updateView(window.location.pathname + window.location.search,"replace");
 
 	// if window active history entry changes, update app view (back/forward browser buttons etc.)
 	window.onpopstate = function(event) {
@@ -22,18 +22,19 @@ $(document).ready(function() {
 });
 
 // app view chanage - core of app functionality
-function updateView(url,hist) {
-	var page = {};
+function updateView(location,hist) {
+	var page = {},
+		url = location.split("?")[0];
 	if (url !== "") {
 		// from app router select page to display
 		page = appRoutes[url] ? appRoutes[url] : appRoutes["notfound"];
 		// alter window history accordingly
 		switch (hist) {
 			case 'replace':
-				history.replaceState({url:url},"",url);
+				history.replaceState({url:location},"",location);
 				break;
 			case 'push':
-				history.pushState({url:url},"",url);
+				history.pushState({url:location},"",location);
 				break;
 		}
 		// display page content

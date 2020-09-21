@@ -15,6 +15,10 @@ var appNavigation = { // global menu setup (items to be displayed)
 		item04: {
 			path: appIndexPath + "page3/",
 			label: "Page 3"
+		},
+		item05: {
+			path: appIndexPath + "page4/",
+			label: "Page 4"
 		}
 	},
 
@@ -24,4 +28,5 @@ var appNavigation = { // global menu setup (items to be displayed)
 	appRoutes[appIndexPath + "page1/"] = Page1;
 	appRoutes[appIndexPath + "page2/"] = Page2;
 	appRoutes[appIndexPath + "page3/"] = Page3;
+	appRoutes[appIndexPath + "page4/"] = Page4;
 	appRoutes["notfound"] = NotFound;

@@ -3,7 +3,7 @@ var Page4 = new ContentRenderer(
 	"<div>\n\
 		<h2>%%title%%</h2>\n\
 		<p><b>%%text%%</b></p>\n\
-		<p><a href='" + appIndexPath + "page4/?id=1' class='internalLink'>reload this page</a> with seach part of url (id = 1) and feel free to change the value of id in browser address bar\n\
+		<p><a href='" + appIndexPath + "page4/?id=1' class='internalLink'>reload this page</a> with search part of url (id = 1) and feel free to change the value of id in browser address bar\n\
 		</p>\n\
 	</div>",
 	{});

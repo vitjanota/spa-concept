@@ -16,7 +16,6 @@ Page4.customPreRenderActivity = function() {
     
     for(var i = 0; i < queryItems.length; i++) {
         queryItem = queryItems[i].split('=');
-        // parsedQuery[queryItem[0]] = decodeURIComponent(queryItem[1].replace(/\+/g," "));
         parsedQuery[queryItem[0]] = queryItem[1];
     }
 

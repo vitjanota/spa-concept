@@ -22,4 +22,6 @@ Page1.customPostRenderActivity = function() {
 		event.preventDefault();
 		$(document).trigger("appStateChanged",[this.getAttribute("href"),"push"]);
 	});
+	
+	$(this).trigger("PostRenderDone");
 };

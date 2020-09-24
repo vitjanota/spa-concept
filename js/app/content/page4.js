@@ -28,6 +28,8 @@ Page4.customPreRenderActivity = function() {
 			text: content
 		}
 	});
+	
+	$(this).trigger("PreRenderDone");
 };
 
 Page4.customPostRenderActivity = function() {
@@ -36,4 +38,6 @@ Page4.customPostRenderActivity = function() {
 		event.preventDefault();
 		$(document).trigger("appStateChanged",[this.getAttribute("href"),"push"]);
 	});
+	
+	$(this).trigger("PostRenderDone");
 };

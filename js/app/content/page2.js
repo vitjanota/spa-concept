@@ -28,4 +28,6 @@ Page2.customPreRenderActivity = function() {
 			<li data-for-each='list'>%%content2%% %%content1%%.</li>\n\
 		</ul>\n\
 	</div>");
+
+	$(this).trigger("PreRenderDone");
 };

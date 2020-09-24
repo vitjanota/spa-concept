@@ -26,15 +26,20 @@ function ContentRenderer(rootRef,templates,data) {
 	};
 
 	// custom pre content rendering activity
-	this.customPreRenderActivity = function() {};
+	this.customPreRenderActivity = function() {
+		// this needs to be added at the end of any custom code
+		$(this).trigger("PreRenderDone");
+	};
 
 	// custom post content rendering activity
-	this.customPostRenderActivity = function() {};
+	this.customPostRenderActivity = function() {
+		// this needs to be added at the end of any custom code
+		$(this).trigger("PostRenderDone");
+	};
 
 	// general pre content rendering wrapper
 	this.preRender = function() {
 		this.customPreRenderActivity();
-		$(this).trigger("PreRenderDone");
 	};
 
 	// rendering itself: find root, add templates and process data
@@ -48,7 +53,6 @@ function ContentRenderer(rootRef,templates,data) {
 	// general post content rendering wrapper
 	this.postRender = function() {
 		this.customPostRenderActivity();
-		$(this).trigger("PostRenderDone");
 	};
   
 	$(this).on("PreRenderDone",function(){

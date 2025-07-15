@@ -1,10 +1,10 @@
 // misc elements selectors and other definitions
 var appIndexPath = "/test/spa/",
 
-	pageContentRef = "#pageBodyContent",
+	pageContentRef = "pageBodyContent",
 	
 	menuSelectors = {
-		menu: "#pageHeaderMenu",
-		menuContent: "#pageHeaderMenuContent",
+		menu: "pageHeaderMenu",
+		menuContent: "pageHeaderMenuContent",
 		menuContentItem: ".pageHeaderMenuContentItem"
 	};

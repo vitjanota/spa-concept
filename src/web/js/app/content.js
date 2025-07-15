@@ -44,8 +44,8 @@ function ContentRenderer(rootRef,templates,data) {
 
 	// rendering itself: find root, add templates and process data
 	this.render = function() {
-		var root = $(this.rootRef);
-		root.html(this.templates);
+		let root = document.getElementById(this.rootRef);
+		root.innerHTML = this.templates;
 		factory.renderRoot(root,this.data);
 		$(this).trigger("RenderDone");
 	};

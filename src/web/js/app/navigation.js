@@ -3,17 +3,18 @@ Inits.push(initNavigation);
 function initNavigation() {
 	createMenu();
 	// add menu icon functionality
-	$(menuSelectors.menu).click(function(){
-		$(menuSelectors.menuContent).slideToggle();
+	$(`#${menuSelectors.menu}`).click(function(){
+		$(`#${menuSelectors.menuContent}`).slideToggle();
 	});
 }
 
 // dynamic menu creation based on app navigation config
 function createMenu() {
-	var menu = new ContentRenderer(
+	let menu = new ContentRenderer(
 		menuSelectors.menuContent,
-		"<a href='%%path%%' class='pageHeaderMenuContentItem'>%%label%%</a>",
-		appNavigation);
+		`<a href='%%path%%' class='pageHeaderMenuContentItem'>%%label%%</a>`,
+		appNavigation
+    );
 
 	menu.customPostRenderActivity = function() {
 		// alter menu items functionality to prevent document reload

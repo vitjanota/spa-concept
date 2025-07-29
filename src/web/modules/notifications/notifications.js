@@ -55,6 +55,10 @@ function Notifications() {
         if (!this.setup.autoHide) {
             notificationBlock.addEventListener('click',() => {this.hideMessage(id)});
             notificationBlock.style.cursor = 'pointer';
+            // preven links to hide notification
+            [...document.querySelectorAll('.notificationArea a')].forEach((item) => { 
+                item.addEventListener('click', (event) => {event.stopPropagation()});
+            });
         }
         document.getElementsByTagName('body')[0].appendChild(notificationBlock);
         return notificationBlock;

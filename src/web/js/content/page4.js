@@ -30,7 +30,13 @@ Page4.customPostRenderActivity = function() {
 		$(document).trigger("appStateChanged",[this.getAttribute("href"),"push"]);
 	});
 
-     notifications.emit('Notification sample');
+    const queryItems = new URLSearchParams(window.location.search);
+    if (queryItems.get('id')) {
+        notifications.emit(`Id was set to ${queryItems.get('id')}`);
+    }
+    let notif = setTimeout(function(){notifications.emit([{message: 'sample 2',link: [{src: 'http://www.szaoc.cz',content: 'foobar',type: 'link'},{content:'barfoo', type: 'text'}]}])},2000);
+    notif = setTimeout(function(){notifications.emit([{message: 'sample 3'}],'warning')},4000);
+    notif = setTimeout(function(){notifications.emit('sample 4')},8000);
 	
 	$(this).trigger("PostRenderDone");
 };

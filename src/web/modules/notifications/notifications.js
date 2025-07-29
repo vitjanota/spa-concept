@@ -1,36 +1,42 @@
-// ======================== notofication functionality ========================
+// ======================== notifications ========================
 
 function Notifications() {
-
     this.hider;
     this.notificationsList = {};
-    this.contentTemplate = `<span>%%message%%</span>
+    this.contentTemplates = {
+        default: `<span>%%message%%</span>
             <span data-process="link">
                 <span data-type="text">%%content%%</span>
                 <a href="%%src%%" data-type="link">%%content%%</a>
-            </span>`;
+            </span>`,
+        warning: `<h1>%%message%%</h1>`
+    };
 
-    this.emit = function(msg) {
+    // emit new notification
+    this.emit = function(msg,type) {
         const nid = crypto.randomUUID();
         this.notificationsList[nid] = {block: this.createNotifier()};
-        const msgObj = {msg: {message: msg}};
-        this.showMessage(nid,msgObj);
+        this.showMessage(nid,msg,type);
         this.hider = setTimeout(this.hideMessage,3000,nid,this);
     }
 
-    this.showMessage = function(id,msg) {
+    // show notification message
+    this.showMessage = function(id,msg,type) {
         let block = this.notificationsList[id].block;
-        this.addContent(block, msg)
+        this.addContent(block,msg,type)
         block.style.marginTop = (window.pageYOffset + 100) + 'px';
         block.style.display = 'block';
         this.slide(this,block,'right',-300,0,3);
     }
 
+     // hide notification message
     this.hideMessage = function(id,that) {
         that.slide(that,that.notificationsList[id].block,'right',0,-400,-3,function(){that.removeNotifier(id)});
     }
 
+    // create notification element
     this.createNotifier = function() {
+        // read position of the last notification and place new one below it
         const lastArea = [...document.querySelectorAll('.notificationArea')].pop();
         const newPos = lastArea ? (Number(lastArea.style.top.replace('px','')) + 100) : 0;
         const notificationBlock = document.createElement('div');
@@ -40,17 +46,24 @@ function Notifications() {
         return notificationBlock;
     }
 
-    this.addContent = function(block,msg) {
-        let factory = new TemplatingFactory();
-        block.innerHTML = this.contentTemplate;
-        factory.renderRoot(block,msg);
+    // add content to notification element
+    this.addContent = function(block,msg,type) {
+        if (typeof msg == 'string') { // content is a string, add it as is
+            block.innerHTML = msg;
+        } else if ((msg instanceof Array) || (msg instanceof Object)) {  // content is structured, use template to display it
+            let factory = new TemplatingFactory();
+            block.innerHTML = (type && this.contentTemplates[type]) ? this.contentTemplates[type] : this.contentTemplates.default;
+            factory.renderRoot(block,msg);
+        }
     }
 
+    // remove notification element
     this.removeNotifier = function(id) {
         this.notificationsList[id].block.remove();
         delete this.notificationsList[id];
     }
 
+    // slide element
     this.slide = function(that,slider,position,progress,end,step,callback) {
         slider.style[position] = progress + "px"
         if (Math.abs(end - progress) >= Math.abs(step)) {

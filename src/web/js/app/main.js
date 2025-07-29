@@ -1,5 +1,6 @@
 let Inits = [],
-	factory = new TemplatingFactory();
+	factory = new TemplatingFactory(),
+    notifications = new Notifications();
 
 $(document).ready(function() {
 	// execute libraries init functions

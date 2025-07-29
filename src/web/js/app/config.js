@@ -1,5 +1,5 @@
 // global app config
-var appNavigation = [ // global menu setup (items to be displayed)
+const appNavigation = [ // global menu setup (items to be displayed)
 		{
 			path: appIndexPath,
 			label: "Home",

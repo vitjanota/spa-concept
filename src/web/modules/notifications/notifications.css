@@ -1,11 +1,8 @@
-/* ==================== notification ==================== */
+/* ==================== notification styling ==================== */
 
-.notificationArea {
-  font-size: 110%;
-  color: #990000;
+div.notificationArea {
   border: 1px solid #bbbbbb;
   border-radius: 0.5em 0 0 0.5em;
-  width: 280px;
   padding: 2em 2em 2em 3em;
   top: 0;
   background-color: rgba(255,255,255,0.85);
@@ -13,4 +10,10 @@
   display: none;
   position: absolute;
   z-index:100;
+}
+
+div.notificationArea > h1 {
+    font-size: 110%;
+    color: #990000;
+    margin: 0;
 }

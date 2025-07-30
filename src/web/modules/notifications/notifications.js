@@ -13,7 +13,8 @@ function Notifications() {
     };
     this.setup = {
         units: 'px',
-        topOffset: 30,
+        topOffset: 20,
+        areaSpacing: 8,
         areaWidth: 300,
         displayDuration: 2000,
         autoHide: false
@@ -30,7 +31,7 @@ function Notifications() {
     this.showMessage =(id,msg,type) => {
         let block = this.notificationsList[id].block;
         this.addContent(block,msg,type)
-        block.style.marginTop = (window.pageYOffset + this.setup.topOffset) + this.setup.units;
+        block.style.marginTop = window.pageYOffset + this.setup.units;
         block.style.display = 'block';
         const callback = this.setup.autoHide ? () => {setTimeout(this.hideMessage,this.setup.displayDuration,id)} : null;
         this.slideIt(block,'right',(-1 * this.setup.areaWidth - 20),0,3,callback);
@@ -46,8 +47,7 @@ function Notifications() {
     this.createNotifier = (id) => {
         // read position of the last notification and place new one below it
         const lastArea = [...document.querySelectorAll('.notificationArea')].pop();
-        // !!!!!!!!!
-        const newPos = lastArea ? (Number(lastArea.style.top.replace(this.setup.units,'')) + 100) : 0;
+        const newPos = lastArea ? (Number(lastArea.getBoundingClientRect().bottom) + this.setup.areaSpacing) : this.setup.topOffset;
         const notificationBlock = document.createElement('div');
         notificationBlock.setAttribute('class',`notificationArea`);
         notificationBlock.style.top = `${newPos}${this.setup.units}`;

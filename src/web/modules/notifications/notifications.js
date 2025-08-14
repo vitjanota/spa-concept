@@ -1,29 +1,48 @@
 // ======================== notifications ========================
 // version 0.1
 
-function Notifications() {
+function Notifications(setup,templates) {
     this.notificationsList = {};
-    this.contentTemplates = {
+    //predefined processing templates
+    this.predefined = {
         default: `<h1>%%title%%</h1>
             <div data-process="body">
                 <span>%%content%%</span>
                 <a href="%%src%%" data-type="link">%%content%%</a>
             </div>`,
-        warning: `<h1>Warning: %%message%%</h1>`
+        warning: `<h1>Warning: %%title%%</h1>
+            <div data-process="body">
+                <span>%%content%%</span>
+                <a href="%%src%%" data-type="link">%%content%%</a>
+            </div>`,
+        error: `<h1>Error: %%title%%</h1>
+            <div data-process="body">
+                <span>%%content%%</span>
+                <a href="%%src%%" data-type="link">%%content%%</a>
+            </div>`,
+        hint: `<h1>Hint: %%title%%</h1>
+            <div data-process="body">
+                <span>%%content%%</span>
+                <a href="%%src%%" data-type="link">%%content%%</a>
+            </div>`
     };
-    this.setup = {
+    // default notifications setup
+    this.default = {
         units: 'px',
         topOffset: 20,
         areaSpacing: 8,
         areaWidth: 300,
-        displayDuration: 2000,
-        autoHide: false
+        displayDuration: 1500,
+        autoHide: true
     }
+
+    this.contentTemplates = {...this.predefined,...templates};
+    this.setup = {...this.default,...setup};
 
     // emit new notification
     this.emit = (msg,type) => {
         const nid = crypto.randomUUID();
-        this.notificationsList[nid] = {block: this.createNotifier(nid)};
+        this.notificationsList[nid] = {block: this.createNotifier(nid,type)};
         this.showMessage(nid,msg,type);
     }
 
@@ -44,12 +63,12 @@ function Notifications() {
     }
 
     // create notification element
-    this.createNotifier = (id) => {
+    this.createNotifier = (id,type) => {
         // read position of the last notification and place new one below it
         const lastArea = [...document.querySelectorAll('.notificationArea')].pop();
         const newPos = lastArea ? (Number(lastArea.getBoundingClientRect().bottom) + this.setup.areaSpacing) : this.setup.topOffset;
         const notificationBlock = document.createElement('div');
-        notificationBlock.setAttribute('class',`notificationArea`);
+        notificationBlock.setAttribute('class',`notificationArea ${type}`);
         notificationBlock.style.top = `${newPos}${this.setup.units}`;
         notificationBlock.style.width = `${this.setup.areaWidth}${this.setup.units}`;
         if (!this.setup.autoHide) {

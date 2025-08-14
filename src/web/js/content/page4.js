@@ -34,9 +34,6 @@ Page4.customPostRenderActivity = function() {
     if (queryItems.get('id')) {
         notifications.emit(`Id was set to ${queryItems.get('id')}`);
     }
-    let notif = setTimeout(function(){notifications.emit([{message: 'sample 2',link: [{src: 'http://www.szaoc.cz',content: 'foobar',type: 'link'},{content:'barfoo', type: 'text'}]}])},2000);
-    notif = setTimeout(function(){notifications.emit([{message: 'sample 3'}],'warning')},4000);
-    notif = setTimeout(function(){notifications.emit('sample 4')},8000);
-	
+
 	$(this).trigger("PostRenderDone");
 };

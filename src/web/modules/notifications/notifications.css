@@ -1,5 +1,5 @@
 /* ==================== notification styling ==================== */
-
+/* ==================== default styling ==================== */
 div.notificationArea {
   border: 1px solid #bbbbbb;
   border-radius: 0.5em 0 0 0.5em;
@@ -14,6 +14,50 @@ div.notificationArea {
 
 div.notificationArea > h1 {
     font-size: 110%;
-    color: #990000;
     margin: 0;
 }
+
+div.notificationArea a {
+    color: #0042FF;
+}
+
+/* ==================== warning ==================== */
+div.notificationArea.warning {
+    background-color: rgba(255,234,202,0.85);
+}
+
+div.notificationArea.warning > h1 {
+    color: #ff9B00;
+}
+
+div.notificationArea.warning a {
+    color: #ff9B00;
+}
+
+/* ==================== error ==================== */
+div.notificationArea.error {
+    background-color: rgba(255,229,229,0.85);
+}
+
+div.notificationArea.error > h1 {
+    color: #990000;
+}
+
+div.notificationArea.error a {
+    color: #990000;
+}
+
+/* ==================== hint ==================== */
+div.notificationArea.hint {
+    background-color: rgba(232,255,233,0.85);
+}
+
+div.notificationArea.hint > h1 {
+    color: #00B509;
+}
+
+div.notificationArea.hint a {
+    color: #00B509;
+}
+
+/* ==================== custom templates section ==================== */

@@ -5,7 +5,7 @@ const app = express();
 app.use(express.static('src/web'));
 
 // this is a core spa functionality
-// all pages served by a single html code
+// all urls served by a single html page
 app.get(['/test/spa/{*a/}', '/test/spa/{*a}'], async (req, res) => {
     try {
         res.sendFile(path.join(__dirname,'src/web/spa.html'));
@@ -15,7 +15,7 @@ app.get(['/test/spa/{*a/}', '/test/spa/{*a}'], async (req, res) => {
     }
 });
 
-// api endpoint for dynamic data fetch example
+// api endpoint for dynamic data load example
 app.get('/test/get_data', async (req, res) => {
     try {
         res.send([{title:'Page 5: Example of dynamic data load',

@@ -24,6 +24,11 @@ const appNavigation = [ // global menu setup (items to be displayed)
 			path: appIndexPath + "page4/",
 			label: "Page 4",
             ref: Page4
+		},
+        {
+			path: appIndexPath + "page5/",
+			label: "Page 5",
+            ref: Page5
 		}
 	],
 

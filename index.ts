@@ -4,6 +4,7 @@ import * as path from 'path';
 const app = express();
 app.use(express.static('src/web'));
 
+// this is a core spa functionality
 // all pages served by a single html code
 app.get(['/test/spa/{*a/}', '/test/spa/{*a}'], async (req, res) => {
     try {
